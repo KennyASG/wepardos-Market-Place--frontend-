@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Carrito = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [orderConfirmed, setOrderConfirmed] = useState(false); // Estado para la confirmación de orden
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,17 +24,15 @@ const Carrito = () => {
 
   const handleConfirmOrder = async () => {
     const idUsuario = localStorage.getItem("idUsuario");
-    const fecha = new Date().toISOString(); // Formato de fecha y hora actual
+    const fecha = new Date().toISOString();
     const total = calculateTotal();
 
-    // Formatear productos en el carrito
     const productos = cartItems.map((item) => ({
       cantidad: item.cantidad,
       subtotal: item.subtotal,
       idProducto: item.id,
     }));
 
-    // Crear el payload para la orden
     const orderData = {
       fecha,
       total,
@@ -52,10 +51,13 @@ const Carrito = () => {
       });
 
       if (response.ok) {
-        alert("¡Orden confirmada! Gracias por tu compra.");
+        setOrderConfirmed(true); // Mostrar mensaje de confirmación
         localStorage.removeItem("cart");
         setCartItems([]);
-        navigate("/home");
+        setTimeout(() => {
+          setOrderConfirmed(false);
+          navigate("/home");
+        }, 3000); // Ocultar el mensaje después de 3 segundos
       } else {
         throw new Error("Error al confirmar la orden");
       }
@@ -68,6 +70,13 @@ const Carrito = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Carrito de Compras</h1>
+
+      {/* Notificación de confirmación de orden */}
+      {orderConfirmed && (
+        <div className="fixed top-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg">
+          ¡Orden confirmada! Gracias por tu compra.
+        </div>
+      )}
 
       {cartItems.length === 0 ? (
         <p className="text-gray-600 text-lg">Tu carrito está vacío.</p>
