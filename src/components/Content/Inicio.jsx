@@ -29,7 +29,24 @@ const Inicio = () => {
   // Agregar producto al carrito y mostrar notificación
   const addToCart = (producto) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.push(producto);
+    
+    // Verificar si el producto ya está en el carrito
+    const existingProductIndex = cart.findIndex((item) => item.id === producto.id);
+    
+    if (existingProductIndex !== -1) {
+      // Si ya está, solo incrementa la cantidad y ajusta el subtotal
+      cart[existingProductIndex].cantidad += 1;
+      cart[existingProductIndex].subtotal += parseFloat(producto.precio);
+    } else {
+      // Si no está, agrega el producto con cantidad inicial y subtotal
+      cart.push({
+        ...producto,
+        cantidad: 1,
+        subtotal: parseFloat(producto.precio),
+      });
+    }
+
+    // Actualizar el carrito en localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
 
     // Mostrar notificación y ocultarla después de 3 segundos
