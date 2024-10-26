@@ -1,8 +1,8 @@
 import React from "react";
 import Inicio from "../Content/Inicio";
-// Componentes para cada sección
+import Carrito from "../Content/Carrito";
 
-const Carrito = () => <div>Contenido del Carrito</div>;
+
 const Perfil = () => <div>Información del Perfil</div>;
 const Mantenimiento = () => <div>Área de Mantenimiento</div>;
 
