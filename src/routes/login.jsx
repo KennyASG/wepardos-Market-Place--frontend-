@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -29,9 +30,19 @@ const Login = () => {
       const data = await response.json();
       console.log("Respuesta de la API:", data);
 
+      // Guardar el token en localStorage
       localStorage.setItem("token", data.token);
 
-      
+      // Decodificar el token
+      const decoded = jwtDecode (data.token);
+      console.log("Decoded Token:", decoded);
+
+      // Almacenar valores decodificados en localStorage
+      localStorage.setItem("username", decoded.username);
+      localStorage.setItem("rol", decoded.rol);
+      localStorage.setItem("idUsuario", decoded.idUsuario);
+
+      // Redirigir al home
       navigate("/home");
 
     } catch (error) {
@@ -42,8 +53,6 @@ const Login = () => {
 
   return (
     <div className="relative flex items-center justify-center h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 font-nunito">
-      
-      
       <div className="absolute top-10 left-10 text-white opacity-10 select-none">
         <img src="./Chetah.svg" alt="Logo" className="w-32 h-32 mb-4 filter-white" />
         <h1 className="text-6xl font-bold">WepardoStore</h1>
