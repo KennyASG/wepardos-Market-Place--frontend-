@@ -1,10 +1,9 @@
 import React from "react";
 import Inicio from "../Content/Inicio";
 import Carrito from "../Content/Carrito";
+import Mantenimiento from "../Content/Mantenimiento";
+import MiPerfil from "../Content/MiPerfil";
 
-
-const Perfil = () => <div>Información del Perfil</div>;
-const Mantenimiento = () => <div>Área de Mantenimiento</div>;
 
 const MainContent = ({ section }) => {
   let content;
@@ -18,7 +17,7 @@ const MainContent = ({ section }) => {
       content = <Carrito />;
       break;
     case "perfil":
-      content = <Perfil />;
+      content = <MiPerfil />;
       break;
     case "mantenimiento":
       content = <Mantenimiento />;

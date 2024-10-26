@@ -40,7 +40,7 @@ const Login = () => {
       // Almacenar valores decodificados en localStorage
       localStorage.setItem("username", decoded.username);
       localStorage.setItem("rol", decoded.rol);
-      localStorage.setItem("idUsuario", decoded.idUsuario);
+      localStorage.setItem("id_usuario", decoded.id_usuario);
 
       // Redirigir al home
       navigate("/home");
@@ -52,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 font-nunito">
+    <div className="relative flex items-center justify-center bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 font-nunito">
       <div className="absolute top-10 left-10 text-white opacity-10 select-none">
         <img src="./Chetah.svg" alt="Logo" className="w-32 h-32 mb-4 filter-white" />
         <h1 className="text-6xl font-bold">WepardoStore</h1>
