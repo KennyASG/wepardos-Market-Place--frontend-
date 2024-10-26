@@ -14,12 +14,13 @@ const AppRouter = () => {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         
-        {/* Rutas protegidas usando PrivateRoute */}
+        
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />} />
         </Route>
         
         <Route path="/register" element={<Register />} />
+
       </Routes>
     </Router>
   );
