@@ -1,7 +1,24 @@
-export default function home() {
-    return (
-      <h1 className="text-3xl font-bold underline font-nunito">
-        Hello world!
-      </h1>
-    )
-  }
+import React from "react";
+import Sidebar from "../components/SideBar/Sidebar";
+import Navbar from "../components/NavBar/Navbar";
+import MainContent from "../components/MainContent/MainContent";
+
+const Home = () => {
+  return (
+    <div className="flex h-screen">
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* Contenedor principal */}
+      <div className="flex flex-col flex-grow">
+        {/* Navbar */}
+        <Navbar />
+        
+        {/* Main Content */}
+        <MainContent />
+      </div>
+    </div>
+  );
+};
+
+export default Home;
