@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HomeIcon, Squares2X2Icon, ShoppingCartIcon, UserIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hasItemsInCart, setHasItemsInCart] = useState(false); // Estado para el punto de notificación en el carrito
   const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
@@ -18,6 +19,12 @@ const Navbar = ({ onSearch }) => {
     localStorage.clear();
     navigate("/login");
   };
+
+  useEffect(() => {
+    // Verificar si hay elementos en el carrito al cargar el componente
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    setHasItemsInCart(cart && cart.length > 0);
+  }, []);
 
   return (
     <div className="bg-[#FDD700] p-4 shadow-lg rounded-full mx-4 mt-4 mb-6 flex items-center justify-between">
@@ -46,9 +53,16 @@ const Navbar = ({ onSearch }) => {
         <button className="text-gray-800 hover:text-gray-900 transform hover:scale-110 transition-transform duration-200">
           <Squares2X2Icon className="w-6 h-6" />
         </button>
-        <button className="text-gray-800 hover:text-gray-900 transform hover:scale-110 transition-transform duration-200">
-          <ShoppingCartIcon className="w-6 h-6" />
-        </button>
+
+        {/* Icono del Carrito con Punto de Notificación */}
+        <div className="relative">
+          <button className="text-gray-800 hover:text-gray-900 transform hover:scale-110 transition-transform duration-200">
+            <ShoppingCartIcon className="w-6 h-6" />
+          </button>
+          {hasItemsInCart && (
+            <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500" />
+          )}
+        </div>
 
         {/* Perfil con menú desplegable */}
         <div className="relative">

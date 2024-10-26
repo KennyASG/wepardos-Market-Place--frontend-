@@ -1,12 +1,33 @@
 import React from "react";
+import Inicio from "../Content/Inicio";
+// Componentes para cada sección
 
-const MainContent = () => {
-  return (
-    <div className="flex-grow p-6 bg-gray-50">
-      <h2 className="text-2xl font-semibold mb-4">Contenido Principal</h2>
-      <p>Aquí va el contenido de la página de inicio...</p>
-    </div>
-  );
+const Carrito = () => <div>Contenido del Carrito</div>;
+const Perfil = () => <div>Información del Perfil</div>;
+const Mantenimiento = () => <div>Área de Mantenimiento</div>;
+
+const MainContent = ({ section }) => {
+  let content;
+
+  
+  switch (section) {
+    case "inicio":
+      content = <Inicio />;
+      break;
+    case "carrito":
+      content = <Carrito />;
+      break;
+    case "perfil":
+      content = <Perfil />;
+      break;
+    case "mantenimiento":
+      content = <Mantenimiento />;
+      break;
+    default:
+      content = <Inicio />;
+  }
+
+  return <div className="p-6 bg-gray-50 flex-grow">{content}</div>;
 };
 
 export default MainContent;
