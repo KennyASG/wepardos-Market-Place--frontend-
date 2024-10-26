@@ -1,10 +1,9 @@
 import React from "react";
 import Inicio from "../Content/Inicio";
 import Carrito from "../Content/Carrito";
-
+import Mantenimiento from "../Content/Mantenimiento";
 
 const Perfil = () => <div>Información del Perfil</div>;
-const Mantenimiento = () => <div>Área de Mantenimiento</div>;
 
 const MainContent = ({ section }) => {
   let content;
